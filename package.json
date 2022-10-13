@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint --ext .js,.jsx src",
-    "start": "webpack serve --open --hot --mode development",
+    "start": "webpack serve --hot --mode development",
     "build": "webpack --config webpack.build.js"
   },
   "repository": {
