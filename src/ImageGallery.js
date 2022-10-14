@@ -323,6 +323,9 @@ class ImageGallery extends React.Component {
       case currentIndex + 1:
         alignment = ` ${rightClassName}`;
         break;
+      case currentIndex + 2:
+        alignment = ` ${rightClassName}`;
+        break;
       default:
         break;
     }

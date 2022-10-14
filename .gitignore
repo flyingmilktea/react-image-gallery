@@ -9,6 +9,3 @@ example/example.js
 example/example.js.map
 demo/
 styles/css/
-
-package-lock.json
-yarn.lock
