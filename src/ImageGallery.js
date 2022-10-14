@@ -311,6 +311,7 @@ class ImageGallery extends React.Component {
     let alignment = "";
     const leftClassName = "left";
     const centerClassName = "center";
+    const centerRightClassName = "center-right";
     const rightClassName = "right";
 
     switch (index) {
@@ -321,7 +322,7 @@ class ImageGallery extends React.Component {
         alignment = ` ${centerClassName}`;
         break;
       case currentIndex + 1:
-        alignment = ` ${rightClassName}`;
+        alignment = ` ${centerRightClassName}`;
         break;
       case currentIndex + 2:
         alignment = ` ${rightClassName}`;
@@ -333,6 +334,8 @@ class ImageGallery extends React.Component {
     if (items.length >= 3 && infinite && index !== currentIndex) {
       if (index === 0 && currentIndex === items.length - 1) {
         // set first slide as right slide if were sliding right from last slide
+        alignment = ` ${centerRightClassName}`;
+      } else if (index === 1 && currentIndex === items.length - 1) {
         alignment = ` ${rightClassName}`;
       } else if (index === items.length - 1 && currentIndex === 0) {
         // set last slide as left slide if were sliding left from first slide
@@ -419,7 +422,6 @@ class ImageGallery extends React.Component {
 
     if (infinite && items.length > 2) {
       const itemCountHalf = Math.floor(items.length / 2);
-
       const diff = index - currentIndex;
       const absDiff = Math.abs(diff);
 
