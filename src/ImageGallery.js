@@ -419,16 +419,16 @@ class ImageGallery extends React.Component {
 
       const diff = index - currentIndex;
       const absDiff = Math.abs(diff);
+
+      // const isLeft =
+      //   currentIndex > itemCountHalf
+      //     ? index < currentIndex && currentIndex - index <= itemCountHalf
+      //     : index < currentIndex || index - currentIndex > itemCountHalf;
       const isLeft =
         currentIndex > itemCountHalf
           ? diff < 0 && absDiff <= itemCountHalf
-          : index < currentIndex || index > currentIndex + itemCountHalf;
-      const offset =
-        absDiff > itemCountHalf ? Math.abs(absDiff - items.length) : absDiff;
-
-      // alignment = `${isLeft ? leftClassName : rightClassName}-${
-      //   absDiff > itemCountHalf ? absDiff - itemCountHalf : absDiff
-      // }`;
+          : diff < 0 || absDiff > itemCountHalf;
+      const offset = absDiff > itemCountHalf ? items.length - absDiff : absDiff;
 
       if (isLeft) {
         translateX = -100 * (isRTL ? -offset : offset) + currentSlideOffset;
