@@ -413,7 +413,6 @@ class ImageGallery extends React.Component {
     const { currentIndex, currentSlideOffset, slideStyle } = this.state;
     const { infinite, items, useTranslate3D, isRTL } = this.props;
     const baseTranslateX = -100 * currentIndex;
-    const totalSlides = items.length - 1;
 
     // calculates where the other slides belong based on currentIndex
     // if it is RTL the base line should be reversed
