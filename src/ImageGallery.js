@@ -564,10 +564,10 @@ class ImageGallery extends React.Component {
         >
           {showItem ? (
             handleRenderItem({
-              ...item,
               currentIndex,
               index,
-              isActive: index === currentIndex,
+              isCurrent: index === currentIndex,
+              ...item,
             })
           ) : (
             <div style={{ height: "100%" }} />
