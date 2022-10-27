@@ -304,6 +304,20 @@ class ImageGallery extends React.Component {
     return 0;
   }
 
+  getSignedOffset = (index, currentIndex, total) => {
+    const half = Math.floor(total / 2);
+    const diff = index - currentIndex;
+    const absDiff = Math.abs(diff);
+
+    const isLeft =
+      currentIndex > half
+        ? diff < 0 && absDiff <= half
+        : diff < 0 || absDiff > half;
+    const offset = absDiff > half ? total - absDiff : absDiff;
+
+    return isLeft ? -offset : offset;
+  };
+
   getAlignmentClassName(index) {
     // Necessary for lazing loading
     const { currentIndex } = this.state;
@@ -311,36 +325,32 @@ class ImageGallery extends React.Component {
     let alignment = "";
     const leftClassName = "left";
     const centerClassName = "center";
-    const centerRightClassName = "center-right";
+    const centerRightClassName = items.length > 3 ? "center-right" : "right";
     const rightClassName = "right";
 
-    switch (index) {
-      case currentIndex - 1:
-        alignment = ` ${leftClassName}`;
+    const offset = this.getSignedOffset(index, currentIndex, items.length);
+
+    switch (offset) {
+      case -1:
+        if (infinite || currentIndex > 0) {
+          alignment = ` ${leftClassName}`;
+        }
         break;
-      case currentIndex:
+      case 0:
         alignment = ` ${centerClassName}`;
         break;
-      case currentIndex + 1:
-        alignment = ` ${centerRightClassName}`;
+      case 1:
+        if (infinite || currentIndex < items.length - 1) {
+          alignment = ` ${centerRightClassName}`;
+        }
         break;
-      case currentIndex + 2:
-        alignment = ` ${rightClassName}`;
+      case 2:
+        if (infinite || currentIndex < items.length - 2) {
+          alignment = ` ${rightClassName}`;
+        }
         break;
       default:
         break;
-    }
-
-    if (items.length >= 3 && infinite) {
-      if (index === 0 && currentIndex === items.length - 1) {
-        alignment = ` ${centerRightClassName}`;
-      } else if (index === 1 && currentIndex === items.length - 1) {
-        // set first slide as right slide if were sliding right from last slide
-        alignment = ` ${rightClassName}`;
-      } else if (index === items.length - 1 && currentIndex === 0) {
-        // set last slide as left slide if were sliding left from first slide
-        alignment = ` ${leftClassName}`;
-      }
     }
 
     return alignment;
@@ -420,31 +430,8 @@ class ImageGallery extends React.Component {
       (baseTranslateX + index * 100) * (isRTL ? -1 : 1) + currentSlideOffset;
 
     if (infinite && items.length > 2) {
-      // if (currentIndex === 0 && index === totalSlides) {
-      //   // make the last slide the slide before the first
-      //   // if it is RTL the base line should be reversed
-      //   translateX = -100 * (isRTL ? -1 : 1) + currentSlideOffset;
-      // } else if (currentIndex === totalSlides && index === 0) {
-      //   // make the first slide the slide after the last
-      //   // if it is RTL the base line should be reversed
-      //   translateX = 100 * (isRTL ? -1 : 1) + currentSlideOffset;
-      // }
-
-      const itemCountHalf = Math.floor(items.length / 2);
-      const diff = index - currentIndex;
-      const absDiff = Math.abs(diff);
-
-      const isLeft =
-        currentIndex > itemCountHalf
-          ? diff < 0 && absDiff <= itemCountHalf
-          : diff < 0 || absDiff > itemCountHalf;
-      const offset = absDiff > itemCountHalf ? items.length - absDiff : absDiff;
-
-      if (isLeft) {
-        translateX = -100 * (isRTL ? -offset : offset) + currentSlideOffset;
-      } else {
-        translateX = 100 * (isRTL ? -offset : offset) + currentSlideOffset;
-      }
+      const offset = this.getSignedOffset(index, currentIndex, items.length);
+      translateX = 100 * (isRTL ? -offset : offset) + currentSlideOffset;
     }
 
     // Special case when there are only 2 items with infinite on
