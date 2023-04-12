@@ -589,7 +589,12 @@ class ImageGallery extends React.Component {
           role="button"
         >
           {showItem ? (
-            handleRenderItem(item)
+            handleRenderItem({
+              currentIndex,
+              index,
+              isCurrent: index === currentIndex,
+              ...item,
+            })
           ) : (
             <div style={{ height: '100%' }} />
           )}
