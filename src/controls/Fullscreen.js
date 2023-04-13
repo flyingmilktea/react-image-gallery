@@ -1,11 +1,10 @@
 import React from 'react';
+
 import { bool, func } from 'prop-types';
+
 import SVG from 'src/SVG';
 
-const Fullscreen = React.memo(({
-  isFullscreen,
-  onClick,
-}) => {
+const Fullscreen = React.memo(({ isFullscreen, onClick }) => {
   return (
     <button
       type="button"
@@ -24,6 +23,5 @@ Fullscreen.propTypes = {
   isFullscreen: bool.isRequired,
   onClick: func.isRequired,
 };
-
 
 export default Fullscreen;

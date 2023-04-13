@@ -1,19 +1,9 @@
 import React from 'react';
-import {
-  string,
-  node,
-  number,
-  func,
-} from 'prop-types';
+
+import { func, node, number, string } from 'prop-types';
 import { useSwipeable } from 'react-swipeable';
 
-const SwipeWrapper = ({
-  children,
-  className,
-  delta,
-  onSwiping,
-  onSwiped,
-}) => {
+const SwipeWrapper = ({ children, className, delta, onSwiping, onSwiped }) => {
   const swipeHandlers = useSwipeable({
     delta,
     onSwiping,

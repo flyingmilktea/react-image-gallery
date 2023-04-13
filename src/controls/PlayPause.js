@@ -1,11 +1,10 @@
 import React from 'react';
+
 import { bool, func } from 'prop-types';
+
 import SVG from 'src/SVG';
 
-const PlayPause = React.memo(({
-  isPlaying,
-  onClick,
-}) => {
+const PlayPause = React.memo(({ isPlaying, onClick }) => {
   return (
     <button
       type="button"
@@ -24,6 +23,5 @@ PlayPause.propTypes = {
   isPlaying: bool.isRequired,
   onClick: func.isRequired,
 };
-
 
 export default PlayPause;

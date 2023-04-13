@@ -1,11 +1,10 @@
 import React from 'react';
+
 import { bool, func } from 'prop-types';
+
 import SVG from 'src/SVG';
 
-const RightNav = React.memo(({
-  disabled,
-  onClick,
-}) => {
+const RightNav = React.memo(({ disabled, onClick }) => {
   return (
     <button
       type="button"
@@ -25,6 +24,5 @@ RightNav.propTypes = {
   disabled: bool.isRequired,
   onClick: func.isRequired,
 };
-
 
 export default RightNav;

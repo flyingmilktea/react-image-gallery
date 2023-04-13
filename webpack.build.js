@@ -1,4 +1,3 @@
-
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemovePlugin = require('remove-files-webpack-plugin');
@@ -8,7 +7,7 @@ const config = {
 };
 
 const jsOutput = Object.assign({}, config, {
-  entry: [ './src/ImageGallery.js', ],
+  entry: ['./src/ImageGallery.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'image-gallery.js',
@@ -20,7 +19,7 @@ const jsOutput = Object.assign({}, config, {
     alias: {
       src: path.resolve(__dirname, 'src/'),
     },
-    extensions: ['.js']
+    extensions: ['.js'],
   },
   module: {
     rules: [
@@ -28,8 +27,8 @@ const jsOutput = Object.assign({}, config, {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      }
-    ]
+      },
+    ],
   },
   externals: {
     // Don't bundle react or react-dom
@@ -64,8 +63,8 @@ const cssOutput = Object.assign({}, config, {
           // Compiles Sass to CSS
           'sass-loader',
         ],
-      }
-    ]
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -82,15 +81,15 @@ const cssOutput = Object.assign({}, config, {
             method: (absoluteItemPath) => {
               return new RegExp(/\.js$/, 'm').test(absoluteItemPath);
             },
-          }
-        ]
-      }
+          },
+        ],
+      },
     }),
   ],
 });
 
 const jsDemoOutput = Object.assign({}, config, {
-  entry: [ './example/app.js', ],
+  entry: ['./example/app.js'],
   output: {
     path: path.resolve(__dirname, 'demo'),
     filename: 'demo.mini.js',
@@ -99,15 +98,15 @@ const jsDemoOutput = Object.assign({}, config, {
     alias: {
       src: path.resolve(__dirname, 'src/'),
     },
-    extensions: ['.js']
+    extensions: ['.js'],
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
-      }
-    ]
+      },
+    ],
   },
   plugins: [
     new RemovePlugin({
@@ -121,9 +120,9 @@ const jsDemoOutput = Object.assign({}, config, {
             method: (absoluteItemPath) => {
               return new RegExp(/\.txt$/).test(absoluteItemPath);
             },
-          }
-        ]
-      }
+          },
+        ],
+      },
     }),
   ],
 });
@@ -144,8 +143,8 @@ const cssDemoOutput = Object.assign({}, config, {
           // Compiles Sass to CSS
           'sass-loader',
         ],
-      }
-    ]
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -162,9 +161,9 @@ const cssDemoOutput = Object.assign({}, config, {
             method: (absoluteItemPath) => {
               return new RegExp(/\.js$/).test(absoluteItemPath);
             },
-          }
-        ]
-      }
+          },
+        ],
+      },
     }),
   ],
 });
