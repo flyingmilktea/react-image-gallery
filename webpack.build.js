@@ -168,4 +168,4 @@ const cssDemoOutput = Object.assign({}, config, {
   ],
 });
 
-module.exports = [jsOutput, cssOutput, jsDemoOutput, cssDemoOutput];
+module.exports = [jsOutput, cssOutput];

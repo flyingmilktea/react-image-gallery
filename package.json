@@ -30,6 +30,10 @@
   "author": "Xiao Lin",
   "main": "./build/image-gallery.js",
   "style": "styles/css/image-gallery.css",
+  "files": [
+    "build",
+    "styles/css"
+  ],
   "scripts": {
     "build": "webpack --config webpack.build.js",
     "lint": "eslint --ext .js,.jsx src",
